@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <html>
 	<head>
-
+		<link rel="stylesheet" type="text/css" href="./css/index.css">
+		<script type="text/javascript" src="./js/index.js"></script>
+		<script type="text/javascript">
+			window.addEventListener('DOMContentLoaded', function() {
+			    // 执行注册
+			    navigator.serviceWorker.register('./sw.js').then(function(registration) {
+					console.log('registered');
+					console.log(registration);      
+			    }).catch(function(err) {
+			      	console.log(err);
+			    });
+  			});
+		</script>
 	</head>
 
 	<body>
