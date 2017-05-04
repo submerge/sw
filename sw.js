@@ -1,7 +1,9 @@
 console.log(caches);
+var CACHE_NAME = 'mysite-static-v1';
+
 self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open('mysite-static-v1').then(function(cache) {
+    caches.open(CACHE_NAME).then(function(cache) {
       console.log(cache);
       return cache.addAll([
         '/sw/css/index.css',
@@ -52,4 +54,17 @@ self.addEventListener('fetch', function(event) {
       }
     )
   );
+});
+
+
+self.addEventListener('activate', function (event) {
+    var cacheWhitelist = ['v1'];
+    event.waitUntil(caches.keys().then(function (cacheNames) {
+        return Promise.all(cacheNames.map(function (cacheName) {
+            if (cacheWhitelist.includes(cacheName)) {
+            // 删除 v1 版本缓存的文件
+            return caches.delete(cacheName);
+          }
+        }));
+    }));
 });
