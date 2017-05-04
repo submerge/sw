@@ -57,17 +57,17 @@ self.addEventListener('fetch', function(event) {
 });
 
 
-/*
-self.addEventListener('activate', function (event) {
-    var cacheWhitelist = ['v1'];
-    event.waitUntil(caches.keys().then(function (cacheNames) {
-        return Promise.all(cacheNames.map(function (cacheName) {
-            if (cacheWhitelist.includes(cacheName)) {
-            // 删除 v1 版本缓存的文件
-            return caches.delete(cacheName);
-          }
-        }));
-    }));
-});
+self.addEventListener('activate', function(event) {
+  var cacheWhitelist = ['v2'];
 
-*/
+  event.waitUntil(
+    caches.keys().then(function(keyList) {
+      /*return Promise.all(keyList.map(function(key) {
+        if (cacheWhitelist.indexOf(key) === -1) {
+          return caches.delete(key);
+        }
+      }));*/
+      console.log(keyList);
+    })
+  );
+});
