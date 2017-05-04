@@ -1,4 +1,5 @@
 console.log(caches);
+console.log('sdf');
 var CACHE_NAME = 'mysite-static-v1';
 self.addEventListener('install', function(event) {
   event.waitUntil(
