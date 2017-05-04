@@ -1,5 +1,5 @@
 console.log(caches);
-console.log(CURRENT_CACHES.prefetch);
+// console.log(CURRENT_CACHES.prefetch);
 var CACHE_NAME = 'mysite-static-v1';
 self.addEventListener('install', function(event) {
   event.waitUntil(
