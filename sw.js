@@ -57,6 +57,7 @@ self.addEventListener('fetch', function(event) {
 });
 
 
+/*
 self.addEventListener('activate', function (event) {
     var cacheWhitelist = ['v1'];
     event.waitUntil(caches.keys().then(function (cacheNames) {
@@ -68,3 +69,5 @@ self.addEventListener('activate', function (event) {
         }));
     }));
 });
+
+*/
