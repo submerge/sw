@@ -1,6 +1,5 @@
 console.log(caches);
 var CACHE_NAME = 'mysite-static-v1';
-
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
