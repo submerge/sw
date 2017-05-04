@@ -1,4 +1,5 @@
 console.log(caches);
+console.log('sdf');
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open('mysite-static-v1').then(function(cache) {
