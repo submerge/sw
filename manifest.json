@@ -1,6 +1,16 @@
 {
-	"name": "白色石头", // 当 Web 添加到桌面后，会出现的 icon 和 name。name 就是用来定义桌面上显示的名字
-	"short_name": "ascend",
+	"name": "白色石头",
+	"short_name":"ascend",
 	"display": "standalone",
-	"scope": "/sw/"
+	"scope": "/",
+	"icons": [
+		{
+			"src": "/icon/icon_title.png",
+			"sizes": "128x128"
+		}
+	],
+	"start_url": "/",
+	"orientation":"portrait",
+	"background_color":"#fff",
+	"theme_color":"#000"
 }
