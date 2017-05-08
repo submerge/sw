@@ -5,7 +5,7 @@
 	"scope": "/",
 	"icons": [
 		{
-			"src": "/icon/icon_title.png",
+			"src": "/sw/icon/icon_title.png",
 			"sizes": "128x128"
 		}
 	],
