@@ -76,6 +76,3 @@ self.addEventListener('activate', function(event) {
 
 // push
 // 在 SW 中使用
-self.registration.showNotification("New mail from Alice", {
-  actions: [{action: 'archive', title: "Archive"}]
-});

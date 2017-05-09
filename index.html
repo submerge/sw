@@ -49,11 +49,36 @@
 			        }
 			        // 有
 			        // doSth();
+			        self.registration.showNotification("New mail from Alice", {
+					  actions: [{action: 'archive', title: "Archive"}]
+					});
 			      })
 			      .catch(function(err) {
 			        window.Demo.debug.log('Error during getSubscription()', err);
 			      });
 			  });
+			}
+
+			function subscribe() {
+			  var pushButton = document.querySelector('.js-push-button');
+			  pushButton.disabled = true;
+
+			  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+			    // 请求订阅
+			    serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly: true})
+			      .then(function(subscription) {
+			        // isPushEnabled = true;
+			        pushButton.textContent = 'Disable Push Messages';
+			        pushButton.disabled = false;
+			        return sendSubscriptionToServer(subscription);
+			      })
+			  });
+			}
+
+
+			window.onload = function () {
+				var pushButton = document.querySelector('.js-push-button');
+				pushButton.addEventListener('click', subscribe)
 			}
 		</script>
 	</head>
