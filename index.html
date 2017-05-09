@@ -6,6 +6,9 @@
 		<link rel="manifest" href="/sw/manifest.json">
 		<script type="text/javascript" src="./js/index.js"></script>
 		<script type="text/javascript">
+			console.log('sdf');
+		</script>
+		<script type="text/javascript">
 			window.addEventListener('DOMContentLoaded', function() {
 			    // 执行注册
 			    navigator.serviceWorker.register('./sw.js').then(function(registration) {
