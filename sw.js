@@ -75,3 +75,28 @@ self.addEventListener('activate', function(event) {
 
 // push
 // 在 SW 中使用
+function sendNote(){
+  console.log('send Note');
+  var title = 'Yay a message.';
+  var body = 'We have received a push message.';
+  var icon = '/icon/icon_title.png';
+  var tag = 'simple-push-demo-notification-tag'+ Math.random();
+  var data = {
+    doge: {
+      wow: 'such amaze notification data'
+    }
+  };
+    self.registration.showNotification(title, {
+      body: body,
+      icon: icon,
+      tag: tag,
+      data: data,
+      actions:[
+        {
+          action:"focus",
+          title:"focus"
+        }]
+    })
+}
+
+sendNote();
