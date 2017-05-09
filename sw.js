@@ -100,3 +100,23 @@ function sendNote(){
 }
 
 sendNote();
+
+self.addEventListener('notificationclick', function(event) {
+  var messageId = event.notification.data;
+  event.notification.close();
+  clients.openWindow(location.origin);
+});
+
+function focusOpen(){
+  var url = location.href;
+  clients.matchAll({
+    type:'window',
+    includeUncontrolled: true
+  }).then(clients=>{
+    for(var client of clients){
+      if(client.url = url) return client.focus(); // 经过测试，focus 貌似无效
+    }
+    console.log('not focus');
+    clients.openWindow(location.origin);
+  })
+}
