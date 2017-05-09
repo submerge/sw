@@ -11,10 +11,50 @@
 			    navigator.serviceWorker.register('./sw.js').then(function(registration) {
 					console.log('registered');
 					console.log(registration);      
-			    }).catch(function(err) {
+			    }).then(initialiseState).catch(function(err) {
 			      	console.log(err);
 			    });
   			});
+
+
+  			function initialiseState() {
+			  if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
+			    return;
+			  }
+
+			  // 检查是否可以进行服务器推
+			  if (!('PushManager' in window)) {
+			    return;
+			  }
+
+			  // 是否被禁用
+			  if (Notification.permission === 'denied') {
+			    return;
+			  }
+
+			  if (Notification.permission === 'granted') {
+			    // dosth();
+			    return;
+			  }
+
+			  // 如果还处于默认情况下，则进行询问
+			  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+			    // 检查订阅
+			    serviceWorkerRegistration.pushManager.getSubscription()
+			      .then(function(subscription) {
+			        // 检查是否已经被订阅
+			        if (!subscription) {
+			          // 没有
+			          return;
+			        }
+			        // 有
+			        // doSth();
+			      })
+			      .catch(function(err) {
+			        window.Demo.debug.log('Error during getSubscription()', err);
+			      });
+			  });
+			}
 		</script>
 	</head>
 
