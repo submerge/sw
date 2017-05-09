@@ -78,7 +78,9 @@
 
 			window.onload = function () {
 				var pushButton = document.querySelector('.js-push-button');
-				pushButton.addEventListener('click', subscribe)
+				pushButton.addEventListener('click', function () {
+					Notification.requestPermission();
+				})
 			}
 		</script>
 	</head>
