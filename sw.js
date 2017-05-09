@@ -43,10 +43,10 @@ self.addEventListener('fetch', function(event) {
             // 那么返回的 response 就无法访问造成失败，所以，这里需要复制一份。
             var responseToCache = response.clone();
 
-            caches.open(CACHE_NAME)
+            /*caches.open(CACHE_NAME)
               .then(function(cache) {
                 cache.put(event.request, responseToCache);
-              });
+              });*/
 
             return response;
           }
