@@ -99,7 +99,14 @@ function sendNote(){
     })
 }
 
-sendNote();
+// sendNote();
+
+self.addEventListener('message',event =>{
+  // test send note
+  sendNote();
+
+  console.log("receive message" + event.data);
+});
 
 self.addEventListener('notificationclick', function(event) {
   var messageId = event.notification.data;
