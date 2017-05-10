@@ -45,7 +45,7 @@ self.addEventListener('install', function(event) {
             /*caches.open(CACHE_NAME)
               .then(function(cache) {
                 cache.put(event.request, responseToCache);
-              });*/
+              });
 
             return response;
           }
@@ -65,7 +65,7 @@ self.addEventListener('activate', function(event) {
         if (cacheWhitelist.indexOf(key) === -1) {
           return caches.delete(key);
         }
-      }));*/
+      }));
       console.log(keyList);
     })
   );
