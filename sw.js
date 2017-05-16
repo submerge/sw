@@ -30,7 +30,7 @@ function checkFile(request){
     var matchPath = pathtoRegexp(PATH_FILE);
     var url = location.pathname;
     var method = request.method.toLowerCase();
-    url = matchPath.exec(url)[1];
+    // url = matchPath.exec(url)[1];
     return !!(goSaving(url) && method === 'get');
 }
 
