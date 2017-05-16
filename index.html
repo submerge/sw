@@ -12,7 +12,6 @@
 			window.addEventListener('load', function() {
 			    // 执行注册
 			    navigator.serviceWorker.register('./sw.js').then(function(registration) {
-					console.log('registered');
 					console.log(registration);      
 			    }).then(initialiseState).catch(function(err) {
 			      	console.log(err);
@@ -25,73 +24,12 @@
 		      	SW.controller.postMessage(location.href)
 		    }
 
-
-  			function initialiseState() {
-			  if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
-			    return;
-			  }
-
-			  // 检查是否可以进行服务器推
-			  if (!('PushManager' in window)) {
-			    return;
-			  }
-
-			  // 是否被禁用
-			  if (Notification.permission === 'denied') {
-			    return;
-			  }
-
-			  if (Notification.permission === 'granted') {
-			    // dosth();
-			    // return;
-			  }
-
-			  // 如果还处于默认情况下，则进行询问
-			  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-			    // 检查订阅
-			    serviceWorkerRegistration.pushManager.getSubscription()
-			      .then(function(subscription) {
-			        // 检查是否已经被订阅
-			        if (!subscription) {
-			          // 没有
-			          return;
-			        }
-			        // 有
-			        // doSth();
-			        self.registration.showNotification("New mail from Alice", {
-					  actions: [{action: 'archive', title: "Archive"}]
-					});
-			      })
-			      .catch(function(err) {
-			        window.Demo.debug.log('Error during getSubscription()', err);
-			      });
-			  });
-			}
-
-			function subscribe() {
-			  var pushButton = document.querySelector('.js-push-button');
-			  pushButton.disabled = true;
-
-			  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-			    // 请求订阅
-			    serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly: true})
-			      .then(function(subscription) {
-			        // isPushEnabled = true;
-			        pushButton.textContent = 'Disable Push Messages';
-			        pushButton.disabled = false;
-			        return sendSubscriptionToServer(subscription);
-			      })
-			  });
-			}
-
-
 			window.onload = function () {
 				var pushButton = document.querySelector('.js-push-button');
 				pushButton.addEventListener('click', function () {
 					Notification.requestPermission();
 				})
 			}
-			console.log('sdfsdf');
 		</script>
 	</head>
 

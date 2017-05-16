@@ -1,77 +1,58 @@
-console.log(caches);
-// console.log(CURRENT_CACHES.prefetch);
-var CACHE_NAME = 'mysite-static-v1';
+importScripts('./path-to-regexp.js');
+
+
+const FILE_LISTS = ['js','css','png'];
+const PATH_FILE = '/:file?'; // 缓存接受的路径文件
+
+const CACHE_VERSION = 1;
+const CURRENT_CACHES = {
+    prefetch: 'prefetch-cache-v' + CACHE_VERSION
+};
+
+
 self.addEventListener('install', function(event) {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
-      console.log(cache);
-      return cache.addAll([
-        '/sw/css/index.css',
-        '/sw/js/index.js'
-      ]);
+    event.waitUntil(
+        caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
+        console.log(cache);
     })
   );
 });
 
-
-/*self.addEventListener('fetch', function(event) {
-  console.log(event.request);
-  event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        // Cache hit - return response
-        if (response) {
-          return response;
-        }
-        // return fetch(event.request);
+var goSaving = function(url){
+   for(var file of FILE_LISTS){
+        if(url.endsWith(file)) return true;
+    }
+    return false;
+}
 
 
-        // 因为 event.request 流已经在 caches.match 中使用过一次，
-        // 那么该流是不能再次使用的。我们只能得到它的副本，拿去使用。
-        var fetchRequest = event.request.clone();
-        // fetch 的通过信方式，得到 Request 对象，然后发送请求
-        return fetch(fetchRequest).then(
-          function(response) {
-            // 检查是否成功
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
+function checkFile(request){
+    var matchPath = pathtoRegexp(PATH_FILE);
+    var url = location.pathname;
+    var method = request.method.toLowerCase();
+    url = matchPath.exec(url)[1];
+    return !!(goSaving(url) && method === 'get');
+}
 
-            // 如果成功，该 response 一是要拿给浏览器渲染，而是要进行缓存。
-            // 不过需要记住，由于 caches.put 使用的是文件的响应流，一旦使用，
-            // 那么返回的 response 就无法访问造成失败，所以，这里需要复制一份。
-            var responseToCache = response.clone();
 
-            /*caches.open(CACHE_NAME)
-              .then(function(cache) {
-                cache.put(event.request, responseToCache);
-              });
 
-            return response;
-          }
-        );
-      }
-    )
-  );
+
+self.addEventListener('fetch', function(event) {
+    // 检查是否需要缓存
+    if(!checkFile(event.request))return;
+
+    event.respondWith(
+    caches.match(event.request).then(function(resp) {
+        return resp || fetch(event.request).then(function(response) {
+            console.log('save file:' + location.href);
+            // 需要缓存,则将资源放到 caches Object 中
+            return caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
+                cache.put(event.request, response.clone());
+                return response;
+            });
+        });
+    }));
 });
-
-
-self.addEventListener('activate', function(event) {
-  var cacheWhitelist = ['v2'];
-
-  event.waitUntil(
-    caches.keys().then(function(keyList) {
-      /*return Promise.all(keyList.map(function(key) {
-        if (cacheWhitelist.indexOf(key) === -1) {
-          return caches.delete(key);
-        }
-      }));
-      console.log(keyList);
-    })
-  );
-});
-*/
-
 
 // push
 // 在 SW 中使用

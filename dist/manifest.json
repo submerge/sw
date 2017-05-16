@@ -1,0 +1,16 @@
+{
+	"name": "白色石头",
+	"short_name":"ascend",
+	"display": "standalone",
+	"scope": "/",
+	"icons": [
+		{
+			"src": "/sw/icon/icon_title.png",
+			"sizes": "128x128"
+		}
+	],
+	"start_url": "/",
+	"orientation":"portrait",
+	"background_color":"#fff",
+	"theme_color":"#000"
+}
