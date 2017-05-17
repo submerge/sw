@@ -1,5 +1,6 @@
 importScripts('./path-to-regexp.js');
 
+console.log('test1');
 
 const FILE_LISTS = ['js','css','png'];
 const PATH_FILE = '/:file?'; // 缓存接受的路径文件
@@ -46,8 +47,7 @@ self.addEventListener('fetch', function(event) {
     event.respondWith(
     caches.match(event.request).then(function(resp) {
         return resp || fetch(event.request).then(function(response) {
-            console.log(response);
-            console.log('save file:' + location.href);
+            console.log('save file:' + response.url);
             // 需要缓存,则将资源放到 caches Object 中
             return caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
                 cache.put(event.request, response.clone());
