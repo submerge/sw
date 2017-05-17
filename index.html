@@ -12,15 +12,15 @@
 			window.addEventListener('load', function() {
 
 				// 在 index.js 中
-				if (SW.controller) { // 这是当前页面的 `controller`
+				/*if (SW.controller) { // 这是当前页面的 `controller`
 				    	console.log('send message ::');
 				      	SW.controller.postMessage("fetch document")
-				}
+				}*/
 
 			    // 执行注册
 			    navigator.serviceWorker.register('./sw.js').then(function(registration) {
 					console.log(registration);      
-			    }).then(initialiseState).catch(function(err) {
+			    }).catch(function(err) {
 			      	console.log(err);
 			    });
   			});
