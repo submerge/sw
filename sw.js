@@ -1,6 +1,6 @@
 importScripts('./path-to-regexp.js');
 
-console.log('test2');
+console.log('test3');
 
 const FILE_LISTS = ['js','css','png'];
 const PATH_FILE = '/:file?'; // 缓存接受的路径文件
