@@ -29,6 +29,7 @@ var goSaving = function(url){
 function checkFile(request){
     var matchPath = pathtoRegexp(PATH_FILE);
     var url = location.pathname;
+    console.log(url);
     var method = request.method.toLowerCase();
     // url = matchPath.exec(url)[1];
     return !!(goSaving(url) && method === 'get');
