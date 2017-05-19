@@ -3,7 +3,7 @@ importScripts('./path-to-regexp.js');
 console.log('test3');
 
 // 需要缓存的文件类型
-const FILE_LISTS = ['js','css','png'];
+const FILE_LISTS = ['js','css','png', 'html'];
 
 //  缓存版本
 const CACHE_VERSION = 1;
@@ -31,7 +31,7 @@ var goSaving = function(url){
 
 // 判断文件是否需要被缓存
 function checkFile(request){
-    var matchPath = pathtoRegexp(PATH_FILE);
+    // var matchPath = pathtoRegexp(PATH_FILE);
     var url = request.url;
     console.log(url);
     var method = request.method.toLowerCase();
