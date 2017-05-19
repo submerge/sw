@@ -3,7 +3,7 @@ importScripts('./path-to-regexp.js');
 console.log('test3');
 
 // 需要缓存的文件类型
-const FILE_LISTS = ['js','css','png', 'html'];
+const FILE_LISTS = ['js','css','png'];
 
 //  缓存版本
 const CACHE_VERSION = 1;
