@@ -1,4 +1,4 @@
-console.log('ww')
+console.log('www')
 
 // 安装
 self.addEventListener('install', function(event) {
