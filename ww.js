@@ -1,4 +1,4 @@
-console.log('www')
+console.log('wwwt')
 
 // 安装
 self.addEventListener('install', function(event) {
