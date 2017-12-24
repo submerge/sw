@@ -9,34 +9,6 @@
 			console.log('sdf');
 		</script>
 		<script type="text/javascript">
-			window.addEventListener('load', function() {
-
-				// 在 index.js 中
-				/*if (SW.controller) { // 这是当前页面的 `controller`
-				    	console.log('send message ::');
-				      	SW.controller.postMessage("fetch document")
-				}*/
-
-			    // 执行注册
-			    navigator.serviceWorker.register('./sw.js').then(function(registration) {
-					console.log(registration);      
-			    }).catch(function(err) {
-			      	console.log(err);
-			    });
-  			});
-
-  			var SW = navigator.serviceWorker;
-  			if (SW.controller) {
-		      	console.log('send message ::');
-		      	SW.controller.postMessage(location.href)
-		    }
-
-			window.onload = function () {
-				var pushButton = document.querySelector('.js-push-button');
-				pushButton.addEventListener('click', function () {
-					Notification.requestPermission();
-				})
-			}
 		</script>
 	</head>
 

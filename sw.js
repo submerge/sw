@@ -1,3 +1,4 @@
+/*
 importScripts('./path-to-regexp.js');
 
 console.log('test3');
@@ -138,3 +139,4 @@ function focusOpen(){
     clients.openWindow(location.origin);
   })
 }
+*/
