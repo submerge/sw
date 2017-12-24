@@ -1,9 +1,9 @@
-console.log('ww1')
+console.log('ww2')
 
 // 安装
 self.addEventListener('install', function(event) {
     event.waitUntil(
-      caches.open('mysite-static-v4').then(function(cache) {
+      caches.open('mysite-static-v5').then(function(cache) {
         return cache.addAll([
           './css/index.css'
         ]);
