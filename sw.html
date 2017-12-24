@@ -5,7 +5,14 @@
 		<link rel="stylesheet" type="text/css" href="./css/index.css">
 		<script type="text/javascript" src="./js/index.js"></script>
 		<script type="text/javascript">
-			console.log('sdf');
+			window.addEventListener('DOMContentLoaded', function() {
+                // 执行注册
+                navigator.serviceWorker.register('./ww.js').then(function(registration) {
+                
+                }).catch(function(err) {
+                
+                }); 
+            });
 		</script>
 	</head>
 
