@@ -3,6 +3,7 @@
 	<head>
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 		<link rel="stylesheet" type="text/css" href="./css/index.css">
+		<link rel="manifest" href="./manifest.json">
 		<script type="text/javascript" src="./js/index.js"></script>
 		<script type="text/javascript">
 			
@@ -39,12 +40,14 @@
 		<button class="js-push-button">test v2 v3</button>
 		<h1>sw</h1>
 		<p>v7</p>
+
+		<button class="addtoScreen">添加至主屏幕</button>
 	</body>
 	<script>
 		window.onload = function () {
 			document.querySelector('.js-push-button').onclick = function () {
 				console.log('js push button')
-				send_message_to_sw('message')
+				// send_message_to_sw('message')
 			}
 		}
 	</script>
