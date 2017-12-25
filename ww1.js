@@ -1,3 +1,5 @@
+importScripts('./path-to-regexp.js');
+
 const CACHE_VERSION = 1;
 const CURRENT_CACHES = {
   prefetch: 'prefetch-cache-v' + CACHE_VERSION
@@ -38,10 +40,6 @@ self.addEventListener('install', function(event) {
     })
   );
 });
-
-
-
-importScripts('./path-to-regexp.js');
 
 const FILE_LISTS = ['js','css','png'];
 const PATH_FILE = '/:file?'; // 缓存接受的路径文件
