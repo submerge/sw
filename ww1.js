@@ -1,4 +1,4 @@
-importScripts('./path-to-regexp.js');
+// importScripts('./path-to-regexp.js');
 
 const CACHE_VERSION = 1;
 const CURRENT_CACHES = {
@@ -64,7 +64,7 @@ function checkFile(request){
 
 self.addEventListener('fetch', function(event) {
   // 检查是否需要缓存！！！！！！！！很重要！！！！！
-  if(!checkFile(event.request))return;
+  // if(!checkFile(event.request))return;
 
   event.respondWith(
     caches.match(event.request).then(function(resp) {
