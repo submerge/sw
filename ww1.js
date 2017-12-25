@@ -1,34 +1,83 @@
-console.log('ww5jk')
+const CACHE_VERSION = 1;
+const CURRENT_CACHES = {
+  prefetch: 'prefetch-cache-v' + CACHE_VERSION
+};
 
-// 安装
 self.addEventListener('install', function(event) {
-    event.waitUntil(
-      caches.open('mysite-static-v8').then(function(cache) {
-        return cache.addAll([
-          './css/index.css'
-        ]);
-      })
-    );
-  });
+  
+ // 缓存指定的文件
+  const urlsToPrefetch = [
+    'vendor.js'
+  ];
 
+  event.waitUntil(
+    caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
+      var cachePromises = urlsToPrefetch.map(function(urlToPrefetch) {
+        var url = new URL(urlToPrefetch,location.origin); // 拼路径
 
-self.addEventListener('fetch', function(event) {
-  console.log(event.request.url)
-  event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      }
-    )
+        console.log('now send the request to' + url);
+
+        var request = new Request(url);
+        return fetch(request).then(function(response) {
+          if (response.status >= 400) {
+            throw new Error('request for ' + urlToPrefetch +
+              ' failed with status ' + response.statusText);
+          }
+
+          return cache.put(urlToPrefetch, response);
+        }).catch(function(error) {
+          console.error('Not caching ' + urlToPrefetch + ' due to ' + error);
+        });
+      });
+
+      return Promise.all(cachePromises).then(function() {
+        console.log('Pre-fetching complete.');
+      });
+    }).catch(function(error) {
+      console.error('Pre-fetching failed:', error);
+    })
   );
 });
 
 
-self.addEventListener('message', function(event){
-  console.log("SW Received Message: " + event.data);
-  event.ports[0].postMessage("SW Says 'Hello back!'");
-  console.log(event)
+
+importScripts('./path-to-regexp.js');
+
+const FILE_LISTS = ['js','css','png'];
+const PATH_FILE = '/:file?'; // 缓存接受的路径文件
+
+
+var goSaving = function(url){
+  for(var file of FILE_LISTS){
+    if(url.endsWith(file)) return true;
+  }
+  return false;
+}
+
+
+// 判断 path/method/contentType
+function checkFile(request){
+  var matchPath = pathtoRegexp(PATH_FILE);
+  var url = location.pathname;
+  var method = request.method.toLowerCase();
+  url = matchPath.exec(url)[1];
+  return !!(goSaving(url) && method === 'get');
+}
+
+self.addEventListener('fetch', function(event) {
+  // 检查是否需要缓存！！！！！！！！很重要！！！！！
+  if(!checkFile(event.request))return;
+
+  event.respondWith(
+    caches.match(event.request).then(function(resp) {
+      return resp || fetch(event.request).then(function(response) {
+          console.log('save file:' + location.href);
+          // 需要缓存,则将资源放到 caches Object 中
+          return caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
+            cache.put(event.request, response.clone());
+            return response;
+          });
+        });
+    })
+  );
 });
