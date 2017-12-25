@@ -24,7 +24,13 @@
 					script.async = true;
 					script.src = '/sw/ww1.js?v=' + Date.now();
 					firstScript.parentNode.insertBefore(script, firstScript);
+					send_message_to_sw('hello servicework')
 				};
+
+				function send_message_to_sw(msg){
+					navigator.serviceWorker.controller.postMessage("Client 1 says '"+msg+"'");
+				}
+
 		</script>
 	</head>
 
