@@ -1,9 +1,9 @@
-console.log('ww4jk')
+console.log('ww5jk')
 
 // 安装
 self.addEventListener('install', function(event) {
     event.waitUntil(
-      caches.open('mysite-static-v7').then(function(cache) {
+      caches.open('mysite-static-v8').then(function(cache) {
         return cache.addAll([
           './css/index.css'
         ]);
