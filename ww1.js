@@ -135,12 +135,3 @@ function focusOpen(){
     clients.openWindow(location.origin);
   })
 }
-
-
-var deferredPrompt;
-window.addEventListener('beforeinstallprompt', function(e) {
-  console.log('beforeinstallprompt Event fired');
-  e.preventDefault();
-  deferredPrompt = e;
-  return false;
-});
