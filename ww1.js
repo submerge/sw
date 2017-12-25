@@ -80,7 +80,7 @@ self.addEventListener('fetch', function(event) {
   );
 });
 
-Notification.requestPermission();
+// Notification.requestPermission();
 
 self.addEventListener('message',event =>{
   
