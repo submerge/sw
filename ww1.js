@@ -1,4 +1,4 @@
-console.log('ww3')
+console.log('ww4j')
 
 // 安装
 self.addEventListener('install', function(event) {
