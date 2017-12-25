@@ -79,3 +79,51 @@ self.addEventListener('fetch', function(event) {
     })
   );
 });
+
+Notification.requestPermission();
+
+function sendNote(){
+  console.log('send Note');
+  var title = 'Yay a message.';
+  var body = 'We have received a push message.';
+  var icon = '/student.png';
+  var tag = 'simple-push-demo-notification-tag'+ Math.random();
+  var data = {
+    doge: {
+      wow: 'such amaze notification data'
+    }
+  };
+    self.registration.showNotification(title, {
+      body: body,
+      icon: icon,
+      tag: tag,
+      data: data,
+      actions:[
+        {
+          action:"focus",
+          title:"focus"
+        }]
+    })
+}
+
+self.addEventListener('notificationclick', function(event) {
+  var messageId = event.notification.data;
+  event.notification.close();
+  if(event.action === "focus"){
+    focusOpen();
+  }
+});
+
+function focusOpen(){
+  var url = location.href;
+  clients.matchAll({
+    type:'window',
+    includeUncontrolled: true
+  }).then(clients=>{
+    for(var client of clients){
+      if(client.url = url) return client.focus(); // 经过测试，focus 貌似无效
+    }
+    console.log('not focus');
+    clients.openWindow(location.origin);
+  })
+}

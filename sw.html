@@ -9,6 +9,7 @@
 			window.addEventListener('DOMContentLoaded', function() {
                 // 执行注册
                 navigator.serviceWorker.register('./ww1.js').then(function(registration) {
+					
 					registration.update();
 					send_message_to_sw('hello service work')
                 }).catch(function(err) {
@@ -35,7 +36,15 @@
 	</head>
 
 	<body>
+		<button class="js-push-button">test v2 v3</button>
 		<h1>sw</h1>
 		<p>v7</p>
 	</body>
+	<script>
+		window.onload = function () {
+			document.querySelector('js-push-button').onclick = function () {
+				console.log('js push button')
+			}
+		}
+	</script>
 </html>
