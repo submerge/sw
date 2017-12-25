@@ -5,17 +5,17 @@
 		<link rel="stylesheet" type="text/css" href="./css/index.css">
 		<script type="text/javascript" src="./js/index.js"></script>
 		<script type="text/javascript">
-			/*
+			
 			window.addEventListener('DOMContentLoaded', function() {
                 // 执行注册
                 navigator.serviceWorker.register('./ww1.js').then(function(registration) {
-					
 					registration.update();
+					send_message_to_sw('hello service work')
                 }).catch(function(err) {
                 
                 }); 
 			});
-			*/
+			
 			// build 后 sw-register-webpack-plugin 会在 index.html 中注入注册代码
 				window.onload = function () {
 					var script = document.createElement('script');
@@ -24,7 +24,7 @@
 					script.async = true;
 					script.src = '/sw/ww1.js?v=' + Date.now();
 					firstScript.parentNode.insertBefore(script, firstScript);
-					send_message_to_sw('hello servicework')
+					// send_message_to_sw('hello servicework')
 				};
 
 				function send_message_to_sw(msg){
