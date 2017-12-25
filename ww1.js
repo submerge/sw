@@ -82,6 +82,14 @@ self.addEventListener('fetch', function(event) {
 
 Notification.requestPermission();
 
+self.addEventListener('message',event =>{
+  
+  console.log("receive message" + event.data);
+  // test send note
+  sendNote();
+});
+
+
 function sendNote(){
   console.log('send Note');
   var title = 'Yay a message.';
