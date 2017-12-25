@@ -9,7 +9,7 @@ self.addEventListener('install', function(event) {
   
  // 缓存指定的文件
   const urlsToPrefetch = [
-    'vendor.js'
+    // 'vendor.js'
   ];
 
   event.waitUntil(
