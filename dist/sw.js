@@ -1,7 +1,7 @@
 
 // importScripts('./path-to-regexp.js');
 
-console.log('test3');
+console.log('test3 test4');
 // 需要缓存的文件类型
 const FILE_LISTS = ['js','css','png'];
 
@@ -14,12 +14,39 @@ const CURRENT_CACHES = {
 
 // 安装
 self.addEventListener('install', function(event) {
+   // 缓存指定的文件
+    const urlsToPrefetch = [
+      // 'vendor.js'
+    ];
+  
     event.waitUntil(
-        caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
-        console.log(cache);
-    })
-  );
-});
+      caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
+        var cachePromises = urlsToPrefetch.map(function(urlToPrefetch) {
+          var url = new URL(urlToPrefetch,location.origin); // 拼路径
+  
+          console.log('now send the request to' + url);
+  
+          var request = new Request(url);
+          return fetch(request).then(function(response) {
+            if (response.status >= 400) {
+              throw new Error('request for ' + urlToPrefetch +
+                ' failed with status ' + response.statusText);
+            }
+  
+            return cache.put(urlToPrefetch, response);
+          }).catch(function(error) {
+            console.error('Not caching ' + urlToPrefetch + ' due to ' + error);
+          });
+        });
+  
+        return Promise.all(cachePromises).then(function() {
+          console.log('Pre-fetching complete.');
+        });
+      }).catch(function(error) {
+        console.error('Pre-fetching failed:', error);
+      })
+    );
+  });
 
 
 var goSaving = function(url){
