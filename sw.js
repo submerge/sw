@@ -1,8 +1,7 @@
-/*
-importScripts('./path-to-regexp.js');
+
+// importScripts('./path-to-regexp.js');
 
 console.log('test3');
-
 // 需要缓存的文件类型
 const FILE_LISTS = ['js','css','png'];
 
@@ -82,6 +81,7 @@ self.addEventListener('message',event =>{
 
 
 
+/*
 // push
 // 在 SW 中使用
 function sendNote(){
