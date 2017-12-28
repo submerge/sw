@@ -9,5 +9,17 @@
   </head>
 
   <body>
-  <script type="text/javascript" src="main.js"></script></body>
+    <script type="text/javascript">
+        window.addEventListener('DOMContentLoaded', function() {
+          // 执行注册
+          navigator.serviceWorker.register('./ww.js').then(function(registration) {
+            // registration.update();
+            // send_message_to_sw('hello service work')
+          }).catch(function(err) {
+        
+          }); 
+        });
+
+    </script>
+  <script type="text/javascript" src="main.9b474d96.js"></script></body>
 </html>

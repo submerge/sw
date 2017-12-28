@@ -12,7 +12,7 @@ const DIST = path.resolve(__dirname, './dist/');
 module.exports = {
     entry: './js/index.js',
     output: {
-        filename: '[name].js',
+        filename: '[name].[chunkhash:8].js',
         path: path.resolve(__dirname, "./dist"),
         chunkFilename: '[id]-[chunkhash].chunk.js'
     },
