@@ -127,6 +127,7 @@ var goSaving = function(url){
 
 // document 文件懒更新
 // 即先展示缓存中资源，然后更新缓存
+/*
 self.addEventListener('message',event =>{
     console.log("receive message" + event.data);
     // 更新根目录下的 html 文件。
@@ -141,7 +142,7 @@ self.addEventListener('message',event =>{
         })
     )
 });
-
+*/
 
 
 
@@ -169,9 +170,6 @@ function sendNote(){
         }]
     })
 }
-
-// sendNote();
-
 
 self.addEventListener('message',event =>{
   // test send note
