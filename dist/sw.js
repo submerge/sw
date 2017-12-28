@@ -1,3 +1,4 @@
+/*
 importScripts('./path-to-regexp.js');
 
 console.log('test3');
@@ -31,7 +32,7 @@ var goSaving = function(url){
 
 // 判断文件是否需要被缓存
 function checkFile(request){
-    var matchPath = pathtoRegexp(PATH_FILE);
+    // var matchPath = pathtoRegexp(PATH_FILE);
     var url = request.url;
     console.log(url);
     var method = request.method.toLowerCase();
@@ -41,15 +42,16 @@ function checkFile(request){
 
 
 self.addEventListener('fetch', function(event) {
-    // 检查是否需要缓存
-    if(!checkFile(event.request))return;
-
     event.respondWith(
     caches.match(event.request).then(function(resp) {
         // 如果缓存中国年有，则直接返回
         // 否则从服务器拉取，并更新缓存
         return resp || fetch(event.request).then(function(response) {
             console.log('save file:' + response.url);
+
+             if(!checkFile(event.request)) {
+                return response;
+             }
             // 需要缓存,则将资源放到 caches Object 中
             return caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
                 cache.put(event.request, response.clone());
@@ -137,3 +139,19 @@ function focusOpen(){
     clients.openWindow(location.origin);
   })
 }
+*/
+
+
+self.addEventListener('fetch', function(event) {
+    event.respondWith(
+      caches.open('mysite-dynamic').then(function(cache) {
+        return cache.match(event.request).then(function(response) {
+          var fetchPromise = fetch(event.request).then(function(networkResponse) {
+            cache.put(event.request, networkResponse.clone());
+            return networkResponse;
+          })
+          return response || fetchPromise;
+        })
+      })
+    );
+});

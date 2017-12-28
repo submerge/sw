@@ -7,9 +7,13 @@
 		{
 			"src": "/sw/icon/icon_title.png",
 			"sizes": "128x128"
+		},
+		{
+			"src": "/sw/icon/play.png",
+			"sizes": "144x144"
 		}
 	],
-	"start_url": "/",
+	"start_url": "/sw/",
 	"orientation":"portrait",
 	"background_color":"#fff",
 	"theme_color":"#000"
