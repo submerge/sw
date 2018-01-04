@@ -6,7 +6,18 @@
 		<link rel="manifest" href="./manifest.json">
 		<script type="text/javascript" src="./js/index.js"></script>
 		<script type="text/javascript">
-			
+			/*
+			if ('serviceWorker' in navigator) {
+				fetch(开关接口)
+				.then(() => {
+					if (降级) {
+						unregister () // 注销
+					} else {
+						registerSw()
+					}
+				})
+			}
+			*/
 			window.addEventListener('DOMContentLoaded', function() {
                 // 执行注册
                 navigator.serviceWorker.register('./ww1.js').then(function(registration) {

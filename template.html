@@ -10,10 +10,29 @@
 
   <body>
     <h1>sw</h1>
+    <img src="https://submerge.github.io/sw/icon/1.jpg">
     <button id="push">push message</button>
 
 
     <script type="text/javascript">
+        /*
+			if (!navigator.serviceWorker) {
+        return
+      }
+      fetch(开关接口)
+      .then(() => {
+        if (降级) {
+          unregister () // 注销
+        } else {
+          // registerSw()
+          navigator.serviceWorker.getRegistration().then((registration) => {
+            registration.unregister()
+          })
+        }
+      })
+			
+			*/
+
         window.addEventListener('DOMContentLoaded', function() {
           // 执行注册
           navigator.serviceWorker.register('./sw.js').then(function(registration) {
@@ -29,6 +48,12 @@
           console.log('test')
           navigator.serviceWorker.controller.postMessage("push test");
         })
+
+        var SW = navigator.serviceWorker;
+        if(SW.controller){
+          console.log('send message ::');
+          SW.controller.postMessage(location.href)
+        }
 
     </script>
   </body>

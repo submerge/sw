@@ -7,7 +7,6 @@
 
 // importScripts('./path-to-regexp.js');
 
-// console.log('test3 test4');
 // 需要缓存的文件类型
 // 只允许缓存js, css, png等类型资源
 const FILE_LISTS = ['js','css','png'];
@@ -24,7 +23,7 @@ const CURRENT_CACHES = {
 self.addEventListener('install', function(event) {
    // 缓存指定的文件
     const urlsToPrefetch = [
-      // 'vendor.js'
+      '/sw/icon/1.jpg'
     ];
   
     event.waitUntil(
@@ -33,9 +32,7 @@ self.addEventListener('install', function(event) {
         var cachePromises = urlsToPrefetch.map(function(urlToPrefetch) {
           // 拼接资源url
           var url = new URL(urlToPrefetch,location.origin); // 拼路径
-  
           console.log('now send the request to' + url);
-  
           var request = new Request(url);
           return fetch(request).then(function(response) {
             if (response.status >= 400) {
@@ -73,7 +70,10 @@ self.addEventListener('activate', function(event) {
             return caches.delete(cacheName);
           }
         })
-      );
+      ).then(function (data) {
+        console.log(data)
+        console.log('acitve')
+      })
     })
   );
 });
@@ -127,30 +127,27 @@ var goSaving = function(url){
 
 // document 文件懒更新
 // 即先展示缓存中资源，然后更新缓存
-/*
 self.addEventListener('message',event =>{
-    console.log("receive message" + event.data);
-    // 更新根目录下的 html 文件。
-    var url = event.data;
-    console.log("update root file " + url);
-    event.waitUntil(
-        caches.open(CURRENT_CACHES.prefetch).then(cache=>{
-            return fetch(url)
-            .then(res=>{
-                cache.put(url,res);
-            })
-        })
-    )
+  console.log("receive message" + event.data);
+  // 更新根目录下的 html 文件。
+  var url = event.data;
+  console.log("update root file " + url);
+  event.waitUntil(
+    caches.open(CURRENT_CACHES.prefetch).then(cache=>{
+        return fetch(url)
+          .then(res=>{
+            cache.put(url,res);
+          })
+    })
+  )
 });
-*/
-
 
 
 // push
 // 在 SW 中使用
 function sendNote(){
     console.log('send Note');
-    var title = 'Yay a message.';
+    var title = 'submerge';
     var body = 'We have received a push message.';
     var icon = '/icon/icon_title.png';
     var tag = 'simple-push-demo-notification-tag'+ Math.random();
