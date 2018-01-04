@@ -149,7 +149,7 @@ function sendNote(){
     console.log('send Note');
     var title = 'submerge';
     var body = 'We have received a push message.';
-    var icon = '/icon/icon_title.png';
+    var icon = '/sw/icon/icon_title.png';
     var tag = 'simple-push-demo-notification-tag'+ Math.random();
     var data = {
         doge: {
