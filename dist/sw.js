@@ -170,8 +170,10 @@ function sendNote(){
 
 self.addEventListener('message',event =>{
   // test send note
+  if (event.data != 'push') {
+    return
+  }
   sendNote();
-
   console.log("receive message" + event.data);
 });
 
