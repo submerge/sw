@@ -23,11 +23,12 @@
       .then(() => {
         if (降级) {
           unregister () // 注销
-        } else {
-          // registerSw()
           navigator.serviceWorker.getRegistration().then((registration) => {
             registration.unregister()
           })
+        } else {
+          // registerSw()
+          register()
         }
       })
 			

@@ -56,7 +56,10 @@ self.addEventListener('install', function(event) {
   });
 
 
-// 调用cache API 缓存的资源除非手动删除，否贼一只在设备硬盘中
+
+
+
+// 调用cache API 缓存的资源除非手动删除，一只在设备硬盘中
 // activate 事件中，手工清楚之前版本的缓存
 self.addEventListener('activate', function(event) {
   // var cacheWhitelist = ['v1'];
@@ -168,15 +171,14 @@ function sendNote(){
     })
 }
 
+/*
 self.addEventListener('message',event =>{
   // test send note
-  if (event.data != 'push') {
-    return
-  }
+  if (event.data != 'push') {}
   sendNote();
   console.log("receive message" + event.data);
 });
-
+*/
 
 
 
