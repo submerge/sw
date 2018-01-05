@@ -9,6 +9,7 @@
 
 // 需要缓存的文件类型
 // 只允许缓存js, css, png等类型资源
+console.log('v1')
 const FILE_LISTS = ['js','css','png', 'html'];
 
 //  缓存版本
