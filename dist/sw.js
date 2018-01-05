@@ -172,14 +172,14 @@ function sendNote(){
     })
 }
 
-/*
+
 self.addEventListener('message',event =>{
   // test send note
   if (event.data != 'push') {}
   sendNote();
   console.log("receive message" + event.data);
 });
-*/
+
 
 
 
